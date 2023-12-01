@@ -8,7 +8,7 @@ function App() {
 
   const helloWorld = async () => {
     try {
-      const res = await fetch("https://handsomely-foregoing-army.glitch.me/");
+      const res = await fetch("https://closed-sunrise-hotel.glitch.me/");
 
       if (!res.ok) {
         throw new Error(`La petición falló con estado: ${res.status}`);
