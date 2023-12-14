@@ -1,24 +1,34 @@
 import { useEffect, useState, useRef } from "react";
 
 function App() {
-  const [text, setText] = useState("");
+  const [content, setContent] = useState("");
   const [notes, setNotes] = useState([]);
   const [id, setId] = useState(0);
 
   const input = useRef();
 
-  function handleText(e) {
-    setText(e.target.value);
+  function handleContent(e) {
+    setContent(e.target.value);
   }
 
-  function addNote(e) {
-    e.preventDefault();
-    if (text) {
-      let note = text;
-      setNotes([...notes, { id: id, content: text }]);
-      setId(id + 1);
-      input.current.value = "";
-      setText("");
+  async function addNote(e) {
+    try {
+      e.preventDefault();
+      if (content) {
+        const data = { content };
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        const res = await fetch("http://localhost:3000/notes", requestOptions);
+        console.log(res);
+        setContent("");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -30,25 +40,25 @@ function App() {
   }
 
   async function getNotes() {
-    const data = await fetch("http://localhost:3000/notes");
+    const data = await fetch("http://localhost:3000/notes/1");
     const res = await data.json();
     console.log(res);
   }
 
   useEffect(() => {
     getNotes();
-  },[])
+  }, []);
 
   return (
     <>
       <div>
         <form action="">
           <input
-            onChange={(e) => handleText(e)}
+            onChange={(e) => handleContent(e)}
             className="form-control"
             type="text"
-            name="text"
-            id="text"
+            name="content"
+            id="content"
             placeholder="Escriba Aquí"
             ref={input}
           />
