@@ -3,7 +3,9 @@ export async function getNotes(userId, setNotes) {
     if (userId) {
       const data = await fetch(`http://localhost:3000/api/notes/${userId}`);
       const res = await data.json();
+      console.log(res);
       setNotes(res);
+      console.log("actualizo")
     }
   } catch (error) {
     console.log(error);
@@ -21,11 +23,7 @@ export async function addNote(userId, content) {
         },
         body: JSON.stringify(data),
       };
-      const res = await fetch(
-        `http://localhost:3000/api/notes/${userId}`,
-        requestOptions
-      );
-      console.log(res);
+      await fetch(`http://localhost:3000/api/notes/${userId}`, requestOptions);
     }
   } catch (error) {
     console.log(error);
@@ -42,8 +40,7 @@ export async function deleteNote(id) {
       },
       body: JSON.stringify(data),
     };
-    const res = await fetch("http://localhost:3000/api/notes", requestOptions);
-    console.log(res);
+    await fetch("http://localhost:3000/api/notes", requestOptions);
   } catch (error) {
     console.log(error);
   }

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as services from "../services/notes.js";
 
 export default function Notes() {
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(1);
   const [content, setContent] = useState("");
   const [notes, setNotes] = useState([]);
 
@@ -22,10 +22,9 @@ export default function Notes() {
   async function deleteNote(id) {
     await services.deleteNote(id);
     await services.getNotes(userId, setNotes);
-  }
+  } 
 
   useEffect(() => {
-    setUserId(sessionStorage.getItem("user_id"));
     services.getNotes(userId, setNotes);
   }, [userId]);
 
@@ -46,9 +45,9 @@ export default function Notes() {
         </button>
 
         <div>
-          {notes.map((note, index) => {
+          {notes.map((note) => {
             return (
-              <div className="border" key={index}>
+              <div className="border" key={note.id}>
                 <p>{note.title}</p>
                 <p>{note.content}</p>
                 <button
