@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { NoteContext } from "../../contexts/NoteContext";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-import * as notesServices from "../../services/notesServices.js";
 
 export default function ModalNote(props) {
+  const noteContext = useContext(NoteContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const [note, setNote] = useState({
     id: props.id,
@@ -32,12 +33,10 @@ export default function ModalNote(props) {
   }
 
   async function updateNote() {
-    await notesServices.updateNote(note);
-    //setNote({ ...note, title: "", content: "" });
+    await noteContext.updateNote(note);
     inputTitle.current.value = "";
     inputContent.current.value = "";
     closeModal();
-    await notesServices.getNotes(props.setNotes);
   }
 
   return (

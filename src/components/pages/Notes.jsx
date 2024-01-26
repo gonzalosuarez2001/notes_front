@@ -1,11 +1,11 @@
-import { useEffect, useState, useRef } from "react";
-import * as notesServices from "../../services/notesServices.js";
+import { useEffect, useState, useRef, useContext } from "react";
 import * as authServices from "../../services/authServices";
+import { NoteContext } from "../../contexts/NoteContext.jsx";
 import NoteCard from "../common/NoteCard.jsx";
 
 export default function Notes() {
+  const noteContext = useContext(NoteContext);
   const [note, setNote] = useState({ title: "", content: "" });
-  const [notes, setNotes] = useState([]);
 
   const inputTitle = useRef();
   const inputContent = useRef();
@@ -15,16 +15,15 @@ export default function Notes() {
   }
 
   async function addNote() {
-    await notesServices.addNote(note);
+    await noteContext.addNote(note);
     setNote({ title: "", content: "" });
     inputTitle.current.value = "";
     inputContent.current.value = "";
-    await notesServices.getNotes(setNotes);
   }
 
   useEffect(() => {
-    notesServices.getNotes(setNotes);
-  }, [setNotes]);
+    noteContext.getNotes();
+  }, []);
 
   return (
     <>
@@ -58,14 +57,13 @@ export default function Notes() {
         </button>
 
         <div>
-          {notes.map((note) => {
+          {noteContext.notes.map((note) => {
             return (
               <NoteCard
                 key={note.id}
                 id={note.id}
                 title={note.title}
                 content={note.content}
-                setNotes={setNotes}
               />
             );
           })}

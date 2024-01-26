@@ -8,9 +8,11 @@ export async function getNotes(setNotes) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    const data = await fetch(`http://localhost:3000/api/notes`, requestOptions);
-    const res = await data.json();
-    setNotes(res);
+    const res = await fetch(`http://localhost:3000/api/notes`, requestOptions);
+    if (res.ok) {
+      const notes = await res.json();
+      setNotes(notes);
+    }
   } catch (error) {
     console.log(error);
   }
