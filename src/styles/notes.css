@@ -1,0 +1,14 @@
+.notes_container {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.notes_input {
+  background-color: #3d4245 !important;
+  color: #cfcfcf !important;
+  border: none !important;
+}
+
+.notes_input::placeholder {
+  color: #cfcfcf !important;
+}

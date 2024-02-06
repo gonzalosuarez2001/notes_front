@@ -1,4 +1,4 @@
-export async function createUser(formData, e) {
+export async function createUser(formData, e, setErrorMessage) {
   e.preventDefault();
   try {
     const data = formData;
@@ -20,15 +20,15 @@ export async function createUser(formData, e) {
       localStorage.setItem("token", token);
       window.location.href = "http://localhost:5173/notes";
     } else {
-      console.log("Error al crear usuario");
+      const errorMessage = await res.json();
+      setErrorMessage(errorMessage.msg || "Error desconocido");
     }
   } catch (error) {
     console.log("Error al enviar el formulario:", error);
-    return { success: false, error: "Error al enviar el formulario." };
   }
 }
 
-export async function validateUser(formData, e) {
+export async function validateUser(formData, e, setErrorMessage) {
   e.preventDefault();
   try {
     const data = formData;
@@ -50,10 +50,12 @@ export async function validateUser(formData, e) {
       localStorage.setItem("token", token);
       window.location.href = "http://localhost:5173/notes";
     } else {
-      console.log("no se pudo");
+      const errorMessage = await res.json();
+      setErrorMessage(errorMessage.msg || "Error desconocido");
     }
   } catch (error) {
     console.log("Error al enviar el formulario:", error);
+    setErrorMessage("Error en la autenticacion");
   }
 }
 
@@ -62,4 +64,13 @@ export function logOut() {
     localStorage.removeItem("token");
   }
   window.location.href = "http://localhost:5173/login";
+}
+
+export function validateAccess() {
+  if (!localStorage.getItem("token")) {
+    window.location.href = "http://localhost:5173/login";
+    return false;
+  } else {
+    return true;
+  }
 }

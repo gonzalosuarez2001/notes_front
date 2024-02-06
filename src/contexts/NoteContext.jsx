@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import * as notesServices from "../services/notesServices";
 
-export const NoteContext = createContext();
+const NoteContext = createContext();
 
 export function NoteContextProvider({ children }) {
   const [notes, setNotes] = useState([]);
@@ -32,4 +32,8 @@ export function NoteContextProvider({ children }) {
       {children}
     </NoteContext.Provider>
   );
+}
+
+export function useNotes() {
+  return useContext(NoteContext);
 }

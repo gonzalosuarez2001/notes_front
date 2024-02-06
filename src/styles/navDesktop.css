@@ -1,0 +1,37 @@
+.nav_desktop_container {
+  height: 100vh;
+  -webkit-box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+  -moz-box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+  box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+}
+
+.nav_desktop_profile {
+  background-color: #2e3336;
+}
+
+.nav_desktop_text {
+  color: #cfcfcf;
+}
+
+.nav_desktop_inline {
+  display: inline;
+  line-height: 1.5;
+}
+
+.nav_desktop_btn {
+  color: #cfcfcf !important;
+}
+
+.nav_desktop_btn_logout {
+  background-color: #2e3336 !important;
+  border: none !important;
+  transition: 0.3s;
+}
+
+.nav_desktop_btn_logout:hover {
+  background-color: rgb(187, 45, 59) !important;
+}
+
+.nav_desktop_active {
+  background-color: rgb(66, 70, 73) !important;
+}

@@ -1,0 +1,17 @@
+.modal_input {
+  background-color: #212428 !important;
+  color: #cfcfcf !important;
+  resize: none;
+}
+
+.modal_title_container {
+  border-bottom: 2px solid #2e3336;
+}
+
+.modal_btn_container {
+  flex-direction: row;
+}
+
+.modal_btn {
+  width: 49% !important;
+}

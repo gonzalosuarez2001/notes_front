@@ -14,13 +14,13 @@ export async function getNotes(setNotes) {
       setNotes(notes);
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error al obtener notas: ", error);
   }
 }
 
 export async function addNote(note) {
   try {
-    if (note.title && note.content) {
+    if (note.title) {
       const data = { note };
       const requestOptions = {
         method: "POST",
@@ -34,27 +34,25 @@ export async function addNote(note) {
       await fetch(`http://localhost:3000/api/notes`, requestOptions);
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error al agregar nota: ", error);
   }
 }
 
 export async function updateNote(note) {
   try {
-    if (note.title && note.content) {
-      const data = { note };
-      const requestOptions = {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(data),
-      };
-      await fetch(`http://localhost:3000/api/notes`, requestOptions);
-    }
+    const data = { note };
+    const requestOptions = {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    };
+    await fetch(`http://localhost:3000/api/notes`, requestOptions);
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error al actualizar nota: ", error);
   }
 }
 
@@ -72,6 +70,6 @@ export async function deleteNote(id) {
     };
     await fetch("http://localhost:3000/api/notes", requestOptions);
   } catch (error) {
-    console.log(error);
+    console.log("Error al eliminar nota: ", error);
   }
 }
