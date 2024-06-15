@@ -1,3 +1,5 @@
+const APIURL = import.meta.env.VITE_REACT_API_URL; 
+
 export async function getNotes(setNotes) {
   try {
     const requestOptions = {
@@ -8,7 +10,7 @@ export async function getNotes(setNotes) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    const res = await fetch(`http://localhost:3000/api/notes`, requestOptions);
+    const res = await fetch(`${APIURL}/api/notes`, requestOptions);
     if (res.ok) {
       const notes = await res.json();
       setNotes(notes);
@@ -31,7 +33,7 @@ export async function addNote(note) {
         },
         body: JSON.stringify(data),
       };
-      await fetch(`http://localhost:3000/api/notes`, requestOptions);
+      await fetch(`${APIURL}/api/notes`, requestOptions);
     }
   } catch (error) {
     console.error("Error al agregar nota: ", error);
@@ -50,7 +52,7 @@ export async function updateNote(note) {
       },
       body: JSON.stringify(data),
     };
-    await fetch(`http://localhost:3000/api/notes`, requestOptions);
+    await fetch(`${APIURL}/api/notes`, requestOptions);
   } catch (error) {
     console.error("Error al actualizar nota: ", error);
   }
@@ -68,7 +70,7 @@ export async function deleteNote(id) {
       },
       body: JSON.stringify(data),
     };
-    await fetch("http://localhost:3000/api/notes", requestOptions);
+    await fetch(`${APIURL}/api/notes`, requestOptions);
   } catch (error) {
     console.log("Error al eliminar nota: ", error);
   }

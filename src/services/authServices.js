@@ -1,3 +1,5 @@
+const APIURL = import.meta.env.VITE_REACT_API_URL;
+
 export async function createUser(formData, e, setErrorMessage) {
   e.preventDefault();
   try {
@@ -10,10 +12,7 @@ export async function createUser(formData, e, setErrorMessage) {
       },
       body: JSON.stringify(data),
     };
-    const res = await fetch(
-      `http://localhost:3000/api/auth/signup`,
-      requestOptions
-    );
+    const res = await fetch(`${APIURL}/api/auth/signup`, requestOptions);
     if (res.ok) {
       const tokenData = await res.json();
       const token = tokenData.token;
@@ -40,10 +39,7 @@ export async function validateUser(formData, e, setErrorMessage) {
       },
       body: JSON.stringify(data),
     };
-    const res = await fetch(
-      `http://localhost:3000/api/auth/login`,
-      requestOptions
-    );
+    const res = await fetch(`${APIURL}/api/auth/login`, requestOptions);
     if (res.ok) {
       const tokenData = await res.json();
       const token = tokenData.token;

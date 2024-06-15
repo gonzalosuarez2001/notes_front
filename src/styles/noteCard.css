@@ -11,10 +11,20 @@
   border-bottom: 2px solid #2e3336;
 }
 
+.noteCard_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .noteCard_text_container {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 400px;
+}
+
+.noteCard_text {
+  font-size: 16px;
 }
 
 .noteCard_btn {
@@ -25,4 +35,12 @@
 
 .noteCard_btn:hover {
   background-color: rgb(187, 45, 59) !important;
+}
+
+.noteCard_font_Comfortaa {
+  font-family: "Comfortaa" !important;
+}
+
+.noteCard_font_Inconsolata {
+  font-family: "Inconsolata" !important;
 }

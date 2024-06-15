@@ -9,7 +9,7 @@ export default function NoteEmptyCard() {
   return (
     <div
       onClick={() => addNote(note)}
-      className="noteEmptyCard_container col-9 col-lg-5 col-xxl-3 m-3 d-flex flex-column align-items-center justify-content-center rounded"
+      className="noteEmptyCard_container col-11 col-sm-8 col-lg-5 col-xxl-3 m-3 d-flex flex-column align-items-center justify-content-center rounded"
     >
       <div className="text-center mb-5">
         <p className="fs-5">Add a new note</p>

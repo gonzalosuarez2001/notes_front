@@ -17,19 +17,20 @@ export default function Login() {
   return (
     <FormNotes
       formName="Log In to Notes"
+      formButton="Log In"
       formData={formData}
       formAction={validateUser}
     >
       <input
         type="email"
-        className="form_notes_input form-control border-0 mb-2"
+        className="form_input form-control border-0 mb-2"
         placeholder="Email"
         name="email"
         onChange={(e) => handleChange(e)}
       />
       <input
         type="password"
-        className="form_notes_input form-control border-0 mb-3"
+        className="form_input form-control border-0 mb-2"
         placeholder="Password"
         name="password"
         onChange={(e) => handleChange(e)}

@@ -1,0 +1,28 @@
+.settings_container {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.settings_title {
+  color: #cfcfcf;
+  width: 100%;
+  border-bottom: 1px solid #2e3336;
+}
+
+.settings_text {
+  color: #858585;
+}
+
+.settings_font_Comfortaa {
+  font-family: "Comfortaa" !important;
+}
+
+.settings_font_Inconsolata {
+  font-family: "Inconsolata" !important;
+}
+
+@media screen and (max-width: 767px) {
+  .settings_container {
+    padding-top: 3.125rem !important;
+  }
+}

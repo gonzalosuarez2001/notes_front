@@ -6,37 +6,46 @@ import Layout from "./components/Layout.jsx";
 import { NoteContextProvider } from "./contexts/NoteContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { UserContextProvider } from "./contexts/UserContext";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { SettingsContextProvider } from "./contexts/SettingsContext";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 function App() {
   return (
     <AuthContextProvider>
-      <UserContextProvider>
-        <NoteContextProvider>
-          <Router>
-            <Routes>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/notes"
-                element={
-                  <Layout>
-                    <Notes />
-                  </Layout>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <Layout>
-                    <Settings />
-                  </Layout>
-                }
-              />
-            </Routes>
-          </Router>
-        </NoteContextProvider>
-      </UserContextProvider>
+      <SettingsContextProvider>
+        <UserContextProvider>
+          <NoteContextProvider>
+            <Router>
+              <Routes>
+                <Route path="/" element={<Navigate to="/notes" />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/notes"
+                  element={
+                    <Layout>
+                      <Notes />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <Layout>
+                      <Settings />
+                    </Layout>
+                  }
+                />
+              </Routes>
+            </Router>
+          </NoteContextProvider>
+        </UserContextProvider>
+      </SettingsContextProvider>
     </AuthContextProvider>
   );
 }

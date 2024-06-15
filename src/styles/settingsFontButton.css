@@ -1,0 +1,18 @@
+.settingsFontButton_btn {
+  color: #cfcfcf !important;
+  border: 2px solid #424649 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Comfortaa {
+  font-family: "Comfortaa" !important;
+}
+
+.Inconsolata {
+  font-family: "Inconsolata" !important;
+}
+
+.activeFont {
+  background-color: #424649 !important;
+}

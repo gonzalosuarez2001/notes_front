@@ -1,0 +1,12 @@
+.settingsBgCard_container {
+  height: 300px;
+  -webkit-box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+  -moz-box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+  box-shadow: 3px 3px 14px 1px rgba(33, 33, 33, 1);
+  color: #cfcfcf;
+  cursor: pointer;
+}
+
+.activeBg {
+  border: 5px solid #424649;
+}

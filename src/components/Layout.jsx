@@ -3,33 +3,45 @@ import NavDesktop from "./NavDesktop";
 import NavMobile from "./NavMobile";
 import { useUser } from "../contexts/UserContext.jsx";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
 export default function Layout({ children }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { userName, getUserName } = useUser();
+  const { username, getUsername } = useUser();
   const url = useLocation().pathname;
+  const { validateAccess } = useAuth();
+  const [loading, setLoading] = useState(true);
 
   const handleChange = () => {
     setScreenWidth(window.innerWidth);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleChange);
-    getUserName();
+    if (validateAccess()) {
+      window.addEventListener("resize", handleChange);
+      getUsername();
+      setLoading(false);
+    }
   }, []);
 
   return (
     <>
-      {screenWidth < 768 ? (
-        <div>
-          <NavMobile userName={userName} url={url} />
-          {children}
-        </div>
+      {loading ? (
+        <></>
       ) : (
-        <div className="container-fluid row p-0 m-0">
-          <NavDesktop userName={userName} url={url} />
-          {children}
-        </div>
+        <>
+          {screenWidth < 768 ? (
+            <div>
+              <NavMobile username={username} url={url} />
+              {children}
+            </div>
+          ) : (
+            <div className="container-fluid row p-0 m-0">
+              <NavDesktop username={username} url={url} />
+              {children}
+            </div>
+          )}
+        </>
       )}
     </>
   );

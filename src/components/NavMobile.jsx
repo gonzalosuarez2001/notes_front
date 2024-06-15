@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import LogOutButton from "./LogOutButton";
 import "../styles/navMobile.css";
 
 export default function Nav(props) {
-  const { logOut } = useAuth();
   const [navbar, setNavbar] = useState({});
 
   useEffect(() => {
@@ -15,10 +14,10 @@ export default function Nav(props) {
   }, []);
 
   return (
-    <nav className="nav_mobile_container navbar navbar-dark bg-dark sticky-top">
+    <nav className="nav_mobile_container navbar navbar-dark bg-dark fixed-top">
       <div className="container-fluid">
         <a className="nav_mobile_text fs-4 navbar-brand ps-2" href="#">
-          Notes
+          Notes App
         </a>
         <button
           className="navbar-toggler fs-4 border-0 pe-2"
@@ -40,40 +39,40 @@ export default function Nav(props) {
             <div className="nav_mobile_profile rounded col-12 mt-2 mb-3 text-center p-2">
               <i className="bi bi-person-circle nav_mobile_text me-2 fs-5"></i>
               <h3 className="nav_mobile_inline nav_mobile_text fs-5 ms-2">
-                Hi {props.userName}!
+                Hi {props.username}!
               </h3>
             </div>
-            <Link to="/notes">
-              <button
-                onClick={() => navbar.hide()}
-                className={`${
-                  props.url === "/notes" ? "nav_mobile_active" : ""
-                } nav_mobile_btn btn-dark btn col-12 fs-5 text-start ps-3 mb-2`}
-              >
-                <i className="bi bi-clipboard me-2"></i>
-                <h4 className="nav_mobile_inline fw-normal fs-5 ms-2">Notes</h4>
-              </button>
-            </Link>
-            <Link to="/settings">
-              <button
-                onClick={() => navbar.hide()}
-                className={`${
-                  props.url === "/settings" ? "nav_mobile_active" : ""
-                } nav_mobile_btn btn-dark btn col-12 fs-5 text-start ps-3 mb-2`}
-              >
-                <i className="bi bi-gear me-2"></i>
-                <h4 className="nav_mobile_inline fw-normal fs-5 ms-2">
-                  Settings
-                </h4>
-              </button>
-            </Link>
-            <button
-              onClick={() => logOut()}
-              className="nav_mobile_btn btn-dark btn col-12 fs-5 text-start ps-3"
-            >
-              <i className="bi bi-box-arrow-left me-2"></i>
-              <h4 className="nav_mobile_inline fw-normal fs-5 ms-2">Log out</h4>
-            </button>
+            <div>
+              <Link to="/notes">
+                <button
+                  onClick={() => navbar.hide()}
+                  className={`${
+                    props.url === "/notes" ? "nav_mobile_active" : ""
+                  } nav_mobile_btn btn-dark btn col-12 fs-5 text-start ps-3 mb-2`}
+                >
+                  <i className="bi bi-clipboard me-2"></i>
+                  <h4 className="nav_mobile_inline fw-normal fs-5 ms-2">
+                    Notes
+                  </h4>
+                </button>
+              </Link>
+              <Link to="/settings">
+                <button
+                  onClick={() => navbar.hide()}
+                  className={`${
+                    props.url === "/settings" ? "nav_mobile_active" : ""
+                  } nav_mobile_btn btn-dark btn col-12 fs-5 text-start ps-3 mb-2`}
+                >
+                  <i className="bi bi-gear me-2"></i>
+                  <h4 className="nav_mobile_inline fw-normal fs-5 ms-2">
+                    Settings
+                  </h4>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <LogOutButton btn_position="start" />
+            </div>
           </div>
         </div>
       </div>

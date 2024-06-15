@@ -1,10 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNotes } from "../contexts/NoteContext";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
+import { useUser } from "../contexts/UserContext";
 import "../styles/noteModal.css";
 
 export default function ModalNote(props) {
+  const { userSettings } = useUser();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { updateNote } = useNotes();
   const [isModalOpen, setModalOpen] = useState(false);
   const [note, setNote] = useState({
@@ -15,6 +18,10 @@ export default function ModalNote(props) {
 
   const inputTitle = useRef();
   const inputContent = useRef();
+
+  const handleWindowChange = () => {
+    setScreenWidth(window.innerWidth);
+  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -38,6 +45,10 @@ export default function ModalNote(props) {
     closeModal();
   }
 
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowChange);
+  }, []);
+
   return (
     <div>
       <button className="btn btn-dark" onClick={() => openModal()}>
@@ -55,10 +66,10 @@ export default function ModalNote(props) {
           content: {
             color: "#cfcfcf",
             backgroundColor: "#262a2e",
-            width: "430px",
+            width: screenWidth <= 500 ? "290px" : "430px",
             margin: "auto",
             borderRadius: "0.375rem",
-            height: "520px",
+            height: screenWidth <= 500 ? "570px" : "517.5px",
             border: "none",
             WebkitBoxShadow: "3px 3px 14px 1px rgba(15, 15, 15, 1)",
             MozBoxShadow: "3px 3px 14px 1px rgba(15, 15, 15, 1)",
@@ -79,6 +90,8 @@ export default function ModalNote(props) {
             value={note.title}
             ref={inputTitle}
             type="text"
+            maxLength="50"
+            style={{ fontFamily: userSettings.noteFont }}
           />
           <textarea
             onChange={(e) => handleChange(e)}
@@ -87,20 +100,22 @@ export default function ModalNote(props) {
             value={note.content}
             ref={inputContent}
             rows="14"
+            maxLength="1000"
+            style={{ fontFamily: userSettings.noteFont }}
           />
         </div>
-        <div className="modal_btn_container row m-2 d-flex justify-content-center">
-          <button
-            onClick={() => abortUpdateNote()}
-            className="modal_btn btn btn-dark p-2 me-2"
-          >
-            Cancelar
-          </button>
+        <div className="modal_btn_container row m-2 d-flex justify-content-between">
           <button
             onClick={() => update()}
-            className="modal_btn btn btn-dark p-2"
+            className="modal_btn btn btn-dark p-2 mb-2"
           >
             Aceptar
+          </button>
+          <button
+            onClick={() => abortUpdateNote()}
+            className="modal_btn btn btn-dark p-2 mb-2"
+          >
+            Cancelar
           </button>
         </div>
       </Modal>
