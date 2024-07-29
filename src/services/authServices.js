@@ -17,7 +17,7 @@ export async function createUser(formData, e, setErrorMessage) {
       const tokenData = await res.json();
       const token = tokenData.token;
       localStorage.setItem("token", token);
-      window.location.href = window.location.hostname + "/notes";
+      window.location.href = "/notes";
     } else {
       const errorMessage = await res.json();
       setErrorMessage(errorMessage.msg || "Error desconocido");
@@ -44,7 +44,7 @@ export async function validateUser(formData, e, setErrorMessage) {
       const tokenData = await res.json();
       const token = tokenData.token;
       localStorage.setItem("token", token);
-      window.location.href = window.location.hostname + "/notes";
+      window.location.href = "/notes";
     } else {
       const errorMessage = await res.json();
       setErrorMessage(errorMessage.msg || "Error desconocido");
@@ -59,12 +59,12 @@ export function logOut() {
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token");
   }
-  window.location.href = window.location.hostname + "/login";
+  window.location.href = "/login";
 }
 
 export function validateAccess() {
   if (!localStorage.getItem("token")) {
-    window.location.href = window.location.hostname + "/login";
+    window.location.href = "/login";
     return false;
   } else {
     return true;
